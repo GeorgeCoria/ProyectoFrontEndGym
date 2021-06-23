@@ -1,0 +1,64 @@
+<header class="row m-0 header-container pb-5 pt-4">
+    <div class="col-6 px-5 pb-5 row m-0 mb-5 contenido">
+        <img src="" class="w-25 col-4" alt="">
+        <div class="col-8 text-white text-start px-2 py-3">
+            <h1 class="fs-1 fw-bold">Gimnasio</h1>
+            <h2 class="fs-3 fw-light">GRUPO 10</h2>
+        </div>
+    </div>
+</header>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="row collapse navbar-collapse p-3 p-sm-0" id="navbarTogglerDemo02">
+            <ul class="navbar-nav col-12 col-sm-9 me-auto mb-2 mb-lg-0 d-flex justify-content-evenly">
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link active" [routerLink]="['']">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alumno</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" [routerLink]="['mi-plan/0']">Mi plan</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['mis-rutinas/0']">Rutinas</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['mis-cuotas/0']">Cuotas</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['mis-asistencias/0']">Asistencias</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Entrenador</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" [routerLink]="['gestionAlumno']">Gestion Alumnos</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['gestionEjercicio']">Gestion Ejercicios</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['plan-alimentacion']">Gestion Planes Alimenticios</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['gestion-cuota']">Gestion Cuotas</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['registrar-dieta']">Prueba registrar dieta</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" [routerLink]="['']">Estadisticas</a>
+                </li>
+
+            </ul>
+          
+        </div>
+        <div class="p-2">
+            <a *ngIf="!usuarioService.userLoggedIn()" [routerLink]="['login']"><button class="btn btn-dark">Log in</button></a>
+            <a style="text-decoration: none;" *ngIf="usuarioService.userLoggedIn()" [routerLink]="['login']" (click)="logout()">
+               <i class="bi bi-person-check-fill" style="padding-right: 2rem; font-size: 2vw;">{{usuarioService.userLogged()}}</i>  <button class="btn btn-warning">Cerrar Sesion</button>
+            </a>
+        </div>
+    </div>
+</nav>
