@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +33,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { UsuarioService } from './services/usuario/usuario.service';
 import { GestionarRutinaComponent } from './components/entrenador/gestionar-rutina/gestionar-rutina.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TokenInterceptorService } from './services/token-interceptor/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ToastrModule.forRoot(),
     NgbModule
   ],
-  providers: [DatePipe, UsuarioService],
+  providers: [DatePipe, UsuarioService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi:true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
