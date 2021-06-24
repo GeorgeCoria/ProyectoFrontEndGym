@@ -68,6 +68,16 @@ export class GestionAlumnosComponent implements OnInit {
     }
   }
 
+  verificarRutina(alumno: Alumno): boolean{
+
+    if(alumno.mes == alumno.ultimaRutinaMes){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
 limpiarFiltro(){
   this.findByApellido= "";
   this.findByDni= "";
@@ -83,8 +93,8 @@ agregarAsistencia(alumno: Alumno){
   this.router.navigate(["asistencia/", alumno._id ]);
 }
 
-agregarRutina(alumno: Alumno){
-  this.router.navigate(["rutina/", alumno._id ]);
+agregarRutina(alumno: Alumno) {
+  this.router.navigate(['rutina/', alumno._id,alumno.mes]);
 }
 
 activarAlumno(alumno: Alumno){
@@ -106,5 +116,20 @@ activarAlumno(alumno: Alumno){
   }
 }
 
+  registrarPlanAlimentacionAlumno(id: string): void {
+    this.router.navigate(['registrar-dieta/', id]);
+  }
+
+  registrarAlumno(){
+    this.router.navigate(['form-alumno/', 0]);
+  }
+
+  modificarAlumno(alumno : Alumno){
+    this.router.navigate(['form-alumno/', alumno._id]);
+  }
+
+  verRegistrosPlanAlimentacion(id : string): void {
+    this.router.navigate(['verRegistrosDieta/', id]);
+  }
 }
 

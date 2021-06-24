@@ -16,6 +16,9 @@ import { GestionPlanAlimenticionComponent } from './components/dieta/gestion-pla
 import { FormPlanAlimentacionComponent } from './components/dieta/form-plan-alimentacion/form-plan-alimentacion.component';
 import { GestionEjercicioComponent } from './components/entrenador/gestion-ejercicio/gestion-ejercicio.component';
 import { GestionarRutinaComponent } from './components/entrenador/gestionar-rutina/gestionar-rutina.component';
+import { PublicacionFacebookComponent } from './components/publicacion-facebook/publicacion-facebook.component';
+import { RegistroDietaComponent } from './components/dieta/registro-dieta/registro-dieta.component';
+import { ViewRegistrosAlumnoComponent } from './components/dieta/view-registros-alumno/view-registros-alumno.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch:'full'},
@@ -23,6 +26,7 @@ const routes: Routes = [
   { path: 'login',component: LoginComponent },
   { path: 'gestion-cuota', component: GestionCuotaComponent},
   { path: 'gestion-rutina/:id', component: GestionRutinaComponent},
+
 
   { path: 'gestionAlumno/form-alumno', component: FormAlumnoComponent},
 
@@ -33,14 +37,19 @@ const routes: Routes = [
 
   { path: 'asistencia/:id', component: GestionarAsistenciaComponent},
   { path: 'cuota/:id', component: GestionarCuotaComponent},
-  { path: 'rutina/:id', component: GestionarRutinaComponent},
+  { path: 'rutina/:id/:mes', component: GestionarRutinaComponent},
   
   { path: 'gestionAlumno',component: GestionAlumnosComponent },
 
-  {path: 'plan-alimentacion', component : GestionPlanAlimenticionComponent},
-  { path: 'form-plan-alimentacion', component: FormPlanAlimentacionComponent},
-  { path: 'gestionEjercicio', component: GestionEjercicioComponent}
-
+  { path: 'form-alumno/:id', component: FormAlumnoComponent},
+  { path: 'plan-alimentacion', component : GestionPlanAlimenticionComponent},
+  { path: 'gestionEjercicio', component: GestionEjercicioComponent},
+  { path: 'publicacion-facebook', component: PublicacionFacebookComponent},
+  { path: 'form-plan-alimentacion/:id', component: FormPlanAlimentacionComponent},
+  { path : 'registrar-dieta/:id', component: RegistroDietaComponent},
+  { path: 'form-plan-alimentacion/:id', component: FormPlanAlimentacionComponent},
+  { path : 'registrar-dieta/:id', component: RegistroDietaComponent},
+  { path: 'verRegistrosDieta/:id' , component: ViewRegistrosAlumnoComponent}
 ];
 
 @NgModule({

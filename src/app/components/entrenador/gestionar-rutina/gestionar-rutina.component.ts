@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Alumno } from 'src/app/models/alumno/alumno';
 import { Ejercicio } from 'src/app/models/ejercicio/ejercicio';
 import { Rutina } from 'src/app/models/rutina/rutina';
+import { AlumnoService } from 'src/app/services/alumno/alumno.service';
 import { EjercicioService } from 'src/app/services/ejercicio/ejercicio.service';
 import { RutinaService } from 'src/app/services/rutina/rutina.service';
 
@@ -17,8 +18,9 @@ export class GestionarRutinaComponent implements OnInit {
   seleccionDia:boolean;
   agregarBtn:boolean=false;
   validarMes:boolean=false;
+  rutinaExistente:boolean=false;
+
   rutina: Rutina = new Rutina();
-  meses: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   alumno: Alumno = new Alumno();
   listaRutina: Array<Rutina> = new Array<Rutina>();
   listaEjercicios: Array<Ejercicio> = new Array<Ejercicio>();
@@ -41,7 +43,8 @@ export class GestionarRutinaComponent implements OnInit {
     private router: Router,
     private ejercicioService: EjercicioService,
     private rutinaService: RutinaService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private alumnoService:AlumnoService
   ) {
     this.getEjercicios();
   }
@@ -72,7 +75,9 @@ export class GestionarRutinaComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.cargarAlumno(params.id);
+      this.rutina.mes=params.mes;
       this.idAlum = params.id;
+      this.cargarRutinaMes();
     });
   }
 
@@ -90,9 +95,7 @@ export class GestionarRutinaComponent implements OnInit {
 
   agregarALista() {
     console.log(this.rutina.dia);
-
     if (
-      this.rutina.mes == undefined ||
       this.rutina.dia == undefined ||
       this.rutina.nombreRutina == undefined ||
       this.ejercicioR == undefined ||
@@ -130,10 +133,9 @@ export class GestionarRutinaComponent implements OnInit {
     this.rutinaService.guardarRutina(rutina).subscribe(
       (result) => {
         console.log(result);
-
+        this.actualizarMesUltimaRutina(this.idAlum,this.rutina.mes);
           this.toastr.success("Rutina guardada exitosamente","Rutina Guardada");
           this.reiniciarCampos();
-          
         
       },
       (error) => {
@@ -163,12 +165,20 @@ export class GestionarRutinaComponent implements OnInit {
     this.router.navigate(["gestionAlumno"]);
   }
   cargarRutinaMes() {
+    this.listaRutina=new Array<Rutina>();
+
     this.rutinaService.getRutinaAlumnoMes(this.idAlum, this.rutina.mes).subscribe(
       (result) => {
         if (result[0] != undefined) {
           this.toastr.error('Ya posee rutina asignada para este mes', 'El alumno debe revisar sus rutinas');
-
-          this.validarMes=false;
+          this.rutinaExistente=true;
+          result.forEach((element) => {
+            console.log(result);
+            let vRutina = new Rutina();
+            Object.assign(vRutina, element);
+            this.listaRutina.push(vRutina);
+          });
+        
         } else { 
           this.toastr.success('Tiene el mes disponible', 'Sin Rutina Asignada');
           this.validarMes=true;
@@ -180,6 +190,30 @@ export class GestionarRutinaComponent implements OnInit {
       }
     );
   }
+
+
+ actualizarMesUltimaRutina(idAlum:string,ultimoMes:number){
+  this.alumnoService.getAlumno(idAlum).subscribe(
+    (result) => {
+      let vAlumno = new Alumno;
+      Object.assign(vAlumno, result);
+      vAlumno.ultimaRutinaMes=ultimoMes;
+      this.alumnoService.updateAlumno(vAlumno).subscribe(
+        (result)=>{
+          console.log(result)
+          
+        },
+        (error)=>{console.log(error);
+        }
+      )
+    },
+    (error) => {
+      console.log(error);
+      alert('error en la peticion');
+    });
+  }
+
+ 
 }
 
 

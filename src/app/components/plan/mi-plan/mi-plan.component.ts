@@ -2,6 +2,9 @@ import { PlanService } from './../../../services/plan/plan.service';
 import { Component, OnInit } from '@angular/core';
 import { Plan } from 'src/app/models/plan/plan';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { Alumno } from 'src/app/models/alumno/alumno';
+import { AlumnoService } from 'src/app/services/alumno/alumno.service';
 
 @Component({
   selector: 'app-mi-plan',
@@ -11,28 +14,39 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MiPlanComponent implements OnInit {
 
   plan: Plan;
+  _idPlan: string;
 
-  constructor(private planService: PlanService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(
+    private planService: PlanService, 
+    private activatedRoute: ActivatedRoute, 
+    private usuarioService:UsuarioService,
+    private router: Router,
+    private alumnoService: AlumnoService
+    ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params.id == '0') {
-        
-      } else {
-        this.getPlanbyID(params.id);
-      }
-    });
+    this.plan = new Plan();
+    this.getAlumnoPlan();
   }
 
-  getPlanbyID(id: string): void {
-    this.planService.getPlanByID(id).subscribe((result) => {
-      this.plan = new Plan();
+  getAlumnoPlan(): void {
+    this.alumnoService.getByIdUsuario(this.usuarioService.idLogged()).subscribe(
+      (result) => {
+        this._idPlan = result.plan;
+        this.getPlanbyID();
+      }
+    )
+  }
+
+  getPlanbyID(): void {
+    console.log(this.usuarioService.idLogged());
+    this.planService.getPlanByID(this._idPlan).subscribe((result) => {
       Object.assign(this.plan, result);
     })
   }
 
   viewMisRutinas(): void {
-    this.router.navigate(['rutinapersonal/0'])
+    this.router.navigate(['rutinapersonal'])
   }
 
 }

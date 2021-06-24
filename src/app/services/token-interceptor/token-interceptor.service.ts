@@ -6,12 +6,11 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TokenInterceptorService implements HttpInterceptor {
+export class TokenInterceptorService  implements HttpInterceptor{
 
   constructor(
     private usuarioService: UsuarioService
   ) { }
-  
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const tokenizeReq = req.clone({
       setHeaders:{
@@ -19,6 +18,5 @@ export class TokenInterceptorService implements HttpInterceptor {
       }
       });
       return next.handle(tokenizeReq);
-     
   }
 }

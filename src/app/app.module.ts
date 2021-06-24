@@ -33,7 +33,15 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { UsuarioService } from './services/usuario/usuario.service';
 import { GestionarRutinaComponent } from './components/entrenador/gestionar-rutina/gestionar-rutina.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FacebookModule } from 'ngx-fb';
+import { PublicacionFacebookComponent } from './components/publicacion-facebook/publicacion-facebook.component';
+import { EstadonoticiaPipe } from './pipes/estadonoticia.pipe';
 import { TokenInterceptorService } from './services/token-interceptor/token-interceptor.service';
+import { RegistroDietaComponent } from './components/dieta/registro-dieta/registro-dieta.component';
+import { ViewRegistrosAlumnoComponent } from './components/dieta/view-registros-alumno/view-registros-alumno.component';
+import { SoloNumeros } from './directivas/validacion.directive';
+import { SoloLetras } from './directivas/validacion.directive';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +64,13 @@ import { TokenInterceptorService } from './services/token-interceptor/token-inte
     GestionPlanAlimenticionComponent,
     FormPlanAlimentacionComponent,
     GestionEjercicioComponent,
-    GestionarRutinaComponent
+    GestionarRutinaComponent,
+    PublicacionFacebookComponent,
+    EstadonoticiaPipe,
+    RegistroDietaComponent,
+    ViewRegistrosAlumnoComponent,
+    SoloNumeros,
+    SoloLetras
   ],
   imports: [
     BrowserModule,
@@ -67,11 +81,13 @@ import { TokenInterceptorService } from './services/token-interceptor/token-inte
     FormsModule,CommonModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    FacebookModule.forRoot(),
+
   ],
   providers: [DatePipe, UsuarioService,
   {
-    provide: HTTP_INTERCEPTORS,
+    provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi:true
   }

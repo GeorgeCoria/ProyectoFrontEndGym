@@ -1,10 +1,6 @@
-<header class="row m-0 header-container pb-5 pt-4">
+<header class="row m-0 header-container pb-5 pt-4 ">
     <div class="col-6 px-5 pb-5 row m-0 mb-5 contenido">
-        <img src="" class="w-25 col-4" alt="">
-        <div class="col-8 text-white text-start px-2 py-3">
-            <h1 class="fs-1 fw-bold">Gimnasio</h1>
-            <h2 class="fs-3 fw-light">GRUPO 10</h2>
-        </div>
+      
     </div>
 </header>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
@@ -27,28 +23,29 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alumno</a>
+                    <a (click)="verificarPermiso()" class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alumno</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" [routerLink]="['mi-plan/0']">Mi plan</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['mis-rutinas/0']">Rutinas</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['mis-cuotas/0']">Cuotas</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['mis-asistencias/0']">Asistencias</a></li>
+                        <li><a [class]="habilitarMenuAlumno" class="dropdown-item" style="cursor:pointer;" (click)="miPlan()">Mi plan</a></li>
+                        <li><a [class]="habilitarMenuAlumno" class="dropdown-item" style="cursor:pointer;" (click)="misRutinas()">Rutinas</a></li>
+                        <li><a [class]="habilitarMenuAlumno" class="dropdown-item" style="cursor:pointer;" (click)="misCuotas()">Cuotas</a></li>
+                        <li><a [class]="habilitarMenuAlumno" class="dropdown-item" style="cursor:pointer;" (click)="misAsistencias()">Asistencias</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Entrenador</a>
+                    <a (click)="verificarPermiso()" class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Entrenador</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" [routerLink]="['gestionAlumno']">Gestion Alumnos</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['gestionEjercicio']">Gestion Ejercicios</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['plan-alimentacion']">Gestion Planes Alimenticios</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['gestion-cuota']">Gestion Cuotas</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['registrar-dieta']">Prueba registrar dieta</a></li>
+                        <li><a [class]="habilitarMenuEntrenador" class="dropdown-item" [routerLink]="['gestionAlumno']">Gestión Alumnos</a></li>
+                        <li><a [class]="habilitarMenuEntrenador" class="dropdown-item" [routerLink]="['gestionEjercicio']">Gestión Ejercicios</a></li>
+                        <li><a [class]="habilitarMenuEntrenador" class="dropdown-item" [routerLink]="['plan-alimentacion']">Gestión Planes Alimenticios</a></li>
+                        <li><a [class]="habilitarMenuEntrenador" class="dropdown-item" [routerLink]="['gestion-cuota']">Gestión Cuotas</a></li>
+                        <li><a [class]="habilitarMenuEntrenador" class="dropdown-item" [routerLink]="['publicacion-facebook']">Publicar Noticia en Facebook/Home</a></li>
+                     
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" [routerLink]="['']">Estadisticas</a>
+                    <a   (click)="verificarPermiso()" [class]="habilitarMenuEntrenador" class="nav-link active" [routerLink]="['']">Estadísticas</a>
                 </li>
 
             </ul>
