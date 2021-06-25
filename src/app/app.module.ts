@@ -41,6 +41,8 @@ import { RegistroDietaComponent } from './components/dieta/registro-dieta/regist
 import { ViewRegistrosAlumnoComponent } from './components/dieta/view-registros-alumno/view-registros-alumno.component';
 import { SoloNumeros } from './directivas/validacion.directive';
 import { SoloLetras } from './directivas/validacion.directive';
+import { ChartsModule } from 'ng2-charts';
+import { EstadisticasComponent } from './components/entrenador/estadisticas/estadisticas/estadisticas.component';
 
 
 @NgModule({
@@ -70,7 +72,8 @@ import { SoloLetras } from './directivas/validacion.directive';
     RegistroDietaComponent,
     ViewRegistrosAlumnoComponent,
     SoloNumeros,
-    SoloLetras
+    SoloLetras,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +86,7 @@ import { SoloLetras } from './directivas/validacion.directive';
     ToastrModule.forRoot(),
     NgbModule,
     FacebookModule.forRoot(),
+    ChartsModule
 
   ],
   providers: [DatePipe, UsuarioService,

@@ -19,6 +19,7 @@ import { GestionarRutinaComponent } from './components/entrenador/gestionar-ruti
 import { PublicacionFacebookComponent } from './components/publicacion-facebook/publicacion-facebook.component';
 import { RegistroDietaComponent } from './components/dieta/registro-dieta/registro-dieta.component';
 import { ViewRegistrosAlumnoComponent } from './components/dieta/view-registros-alumno/view-registros-alumno.component';
+import { EstadisticasComponent } from './components/entrenador/estadisticas/estadisticas/estadisticas.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch:'full'},
@@ -40,7 +41,7 @@ const routes: Routes = [
   { path: 'rutina/:id/:mes', component: GestionarRutinaComponent},
   
   { path: 'gestionAlumno',component: GestionAlumnosComponent },
-
+  { path: 'estadisticas', component: EstadisticasComponent },
   { path: 'form-alumno/:id', component: FormAlumnoComponent},
   { path: 'plan-alimentacion', component : GestionPlanAlimenticionComponent},
   { path: 'gestionEjercicio', component: GestionEjercicioComponent},
